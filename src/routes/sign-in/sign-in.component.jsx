@@ -13,8 +13,8 @@ const SignIn = () => {
   useEffect(()=>{
 
     async function getRedirectDate(){
-      const resp = await getRedirectResult(auth);
-      console.log('respRedirect', resp)
+      const { user } = await getRedirectResult(auth);
+      await createUserDocumentFromAuth(user);
     }
 
     getRedirectDate();
