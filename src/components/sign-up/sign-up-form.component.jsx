@@ -2,9 +2,9 @@ import { useState } from "react";
 import { AuthUsingEmailPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 
 import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
+import Button from "../button/button.component"; 
 
-import './sign-up-form.style.scss'
+import "./sign-up-form.style.scss";
 
 const defaultFormValues = {
   displayName: "",
@@ -16,6 +16,7 @@ const defaultFormValues = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormValues);
   const { displayName, confirmPassword, email, password } = formFields;
+ 
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,7 +26,7 @@ const SignUpForm = () => {
     }
     const Auth = async () => {
       try {
-        const { user } = await AuthUsingEmailPassword(email, password);
+        const { user } = await AuthUsingEmailPassword(email, password); 
         const savedUser = await createUserDocumentFromAuth(user, { displayName });
         resetFormFields();
         console.log("savedUser", savedUser);
@@ -48,7 +49,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="sign-up-container" >
+    <div className="sign-up-container">
       <h2>Don't have a account</h2>
       <span>Sign Up with your email and password</span>
       <form onSubmit={handleSubmit}>
@@ -76,6 +77,7 @@ const SignUpForm = () => {
           name="password"
           onChange={handleChanges}
           value={password}
+          autoComplete="on"
           required
         />
 
@@ -84,6 +86,7 @@ const SignUpForm = () => {
           type="password"
           name="confirmPassword"
           onChange={handleChanges}
+          autoComplete="on"
           value={confirmPassword}
           required
         />
