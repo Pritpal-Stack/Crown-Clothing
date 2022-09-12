@@ -9,14 +9,14 @@ export const CategoriesContext = createContext({
 
 export const CategoriesProvider = ({ children }) => {
   const [categoryMap, setCategoryMap] = useState({});
-
+  
   useEffect(() => {
     const getCategoryMap = async () => {
       const categoryMap = await getCategoryAndDocuments(); 
       setCategoryMap(categoryMap)
     };
     getCategoryMap();
-  }, []);
+  }, []); 
 
   // useEffect(()=>{
   //   addCollectionAndDocuments('categories', SHOP_DATA) // for adding data to firestore
