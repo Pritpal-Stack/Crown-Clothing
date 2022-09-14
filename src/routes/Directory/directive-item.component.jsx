@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { CategoriesContext } from "../../context/categories.context";
 import ProductCart from "../../components/product-cart/product-cart.component";
+import { Fragment } from "react";
 
 const DirectiveItem = () => {
   const { category } = useParams();
@@ -16,9 +17,12 @@ const DirectiveItem = () => {
   }, [category, categoryMap]);
 
   return (
-    <div className="directive-item-container">
-      {products && products.map((product) => <ProductCart key={product.id} product={product} />)}
-    </div>
+    <Fragment>
+      <h1>{category.toUpperCase()}</h1>
+      <div className="directive-item-container">
+        {products && products.map((product) => <ProductCart key={product.id} product={product} />)}
+      </div>
+    </Fragment>
   );
 };
 
