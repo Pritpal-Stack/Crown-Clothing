@@ -117,6 +117,8 @@ export const CartProvider = ({ children }) => {
     updateCartItemReducer(newCartItems);
   };
 
+  
+
   const setIsCartOpen = (bool) => {
     dispatch({ type: CART_ACTION_TYPE.SET_IS_CART_OPEN, payload : bool })
   }
