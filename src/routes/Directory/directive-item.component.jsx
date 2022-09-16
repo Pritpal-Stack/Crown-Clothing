@@ -1,14 +1,18 @@
 import "./directive-item.styles.scss";
-
 import { useParams } from "react-router-dom";
-import { useContext, useState, useEffect } from "react";
-import { CategoriesContext } from "../../context/categories.context";
 import ProductCart from "../../components/product-cart/product-cart.component";
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectCategoriesMap } from "../../store/categories/category.selector";
 
 const DirectiveItem = () => {
   const { category } = useParams();
-  const { categoryMap } = useContext(CategoriesContext);
+
+  const categoryMap = useSelector(selectCategoriesMap);
+ 
+ 
+
+  // const { categoryMap } = useContext(CategoriesContext);
 
   const [products, setProducts] = useState(categoryMap[category]);
 
