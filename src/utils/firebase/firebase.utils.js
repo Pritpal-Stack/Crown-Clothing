@@ -26,12 +26,12 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
 export const db = getFirestore();
 
-export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) =>{
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
 
     const collectionRef = collection(db, collectionKey);
     const batch = writeBatch(db);
 
-    objectsToAdd.forEach((object)=>{
+    objectsToAdd.forEach((object) => {
         const docRef = doc(collectionRef, object.title.toLowerCase());
         batch.set(docRef, object);
     })
@@ -41,17 +41,14 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) =>{
 
 }
 
-export const getCategoryAndDocuments = async ()=>{
+export const getCategoryAndDocuments = async () => {
     const collectionRef = collection(db, 'categories');
     const q = query(collectionRef);
 
     const querySnapShot = await getDocs(q);
-    const categoryMap = querySnapShot.docs.reduce((acc, docSnapShot)=>{
-        const { title, items } = docSnapShot.data();
-        acc[title.toLowerCase()] = items;
-        return acc;
-    }, {})
-    return categoryMap;
+    return querySnapShot.docs.map(querySnapShot => querySnapShot.data());
+
+
 
 }
 
@@ -94,6 +91,6 @@ export const SignOutUser = async () => {
     return await signOut(auth);
 }
 export const onAuthStateChangedListener = (callback) => {
-    if(!callback) return;
+    if (!callback) return;
     return onAuthStateChanged(auth, callback)
 }
