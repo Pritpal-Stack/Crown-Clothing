@@ -3,9 +3,7 @@ import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 // Redux
 import { useDispatch } from "react-redux";
-import { setCategories } from "../../store/categories/category.action";
-// Utils
-import { getCategoryAndDocuments } from "../../utils/firebase/firebase.utils";
+import { fetchCategoriesAsync } from "../../store/categories/category.action"; 
 // Components
 import CategoriesPreview from "../categories-preview/categories-preview.component";
 import DirectiveItem from "../Directory/directive-item.component";
@@ -16,11 +14,7 @@ const Shop = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const getCategory = async () => {
-      const categoriesArray = await getCategoryAndDocuments();  
-      dispatch(setCategories(categoriesArray));
-    };
-    getCategory();
+    dispatch(fetchCategoriesAsync());
     // dispatch won't change;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

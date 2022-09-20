@@ -3,6 +3,7 @@ import { compose, createStore, applyMiddleware } from "redux";
 import { RootReduces } from "./root-reducers";
 import { persistReducer, persistStore } from "redux-persist"; // for retaining the cart values
 import  storage  from "redux-persist/lib/storage"
+import thunk from "redux-thunk";
 
 const loggerMiddleware = (store) => (next) => (action) => {
     if (!action.type) {
@@ -19,12 +20,13 @@ const loggerMiddleware = (store) => (next) => (action) => {
 
 }
 
-const middleWare = [process.env.NODE_ENV && loggerMiddleware].filter(Boolean);
+const middleWare = [process.env.NODE_ENV && loggerMiddleware, thunk].filter(Boolean);
 
 const persistConfig = {
     key: "root",
     storage,
-    blacklist: ['user']
+    // blacklist: ['user']
+    whitelist: ['cart']
 }
 
 const persistedReducer = persistReducer(persistConfig, RootReduces)
