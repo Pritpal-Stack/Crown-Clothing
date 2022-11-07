@@ -47,7 +47,7 @@ export const getCategoryAndDocuments = async (string) => {
 
     const querySnapShot = await getDocs(q);
     return querySnapShot.docs.map(querySnapShot => querySnapShot.data());
-    
+
 }
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInfo = {}) => {
@@ -71,7 +71,8 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo = {}) 
 
     }
 
-    return userDocRef;
+    // return userDocRef;
+    return userSnapshot;
 
 }
 
@@ -91,4 +92,13 @@ export const SignOutUser = async () => {
 export const onAuthStateChangedListener = (callback) => {
     if (!callback) return;
     return onAuthStateChanged(auth, callback)
+}
+
+export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+        const unsubscribe = onAuthStateChanged(auth, (userAuth) => {
+            unsubscribe();
+            resolve(userAuth)
+        }, reject)
+    })
 }

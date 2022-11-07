@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom"; 
 import { useEffect } from "react";
-import { onAuthStateChangedListener, createUserDocumentFromAuth } from "./utils/firebase/firebase.utils";
+import { getCurrentUser } from "./utils/firebase/firebase.utils";
 import { useDispatch } from "react-redux";
 
 // components 
@@ -17,16 +17,9 @@ const App = () => {
   const dispatch = useDispatch();
  
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      if(user){
-        createUserDocumentFromAuth(user);
-      }
-      dispatch(setCurrentUser(user));
-    });
-
-    return unsubscribe;
-  //as dispatch content will never changes we should not pass any thing in below array
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    getCurrentUser().then(resp => {
+      console.log('resp', resp) 
+    })
   }, []);
 
 
