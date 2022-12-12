@@ -9,3 +9,11 @@ export const emailSignInStart = (email, password) =>
     createAction(USER_ACTION_TYPE.EMAIL_SIGN_IN_START, { email, password })
 export const signInFailed = (error) => createAction(USER_ACTION_TYPE.SIGN_IN_FAILED, error)
 export const signInSuccess = (user) => createAction(USER_ACTION_TYPE.SIGN_IN_SUCCESS, user)
+
+export const signUpStart = (email, password, displayName) => createAction(USER_ACTION_TYPE.SIGN_UP_START, { email, password, displayName })
+export const signUpFailed = (error) => createAction(USER_ACTION_TYPE.SIGN_UP_FAILED, error)
+export const signUpSuccess = (user, additionalDetails) => createAction(USER_ACTION_TYPE.SIGN_UP_SUCCESS, {user, additionalDetails})
+
+export const signOutStart = () => createAction(USER_ACTION_TYPE.SIGN_OUT_START)
+export const signOutFailed = (error) => createAction(USER_ACTION_TYPE.SIGN_OUT_FAILED, error)
+export const signOutSuccess = () => createAction(USER_ACTION_TYPE.SIGN_OUT_SUCCESS)
