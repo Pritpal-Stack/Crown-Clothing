@@ -1,8 +1,8 @@
 import { useState } from "react";
-import {useDispatch} from 'react-redux'
+import { useDispatch } from "react-redux";
 
 import FormInput from "../form-input/form-input.component";
-import Button, {BUTTON_TYPE} from "../button/button.component";
+import Button, { BUTTON_TYPE } from "../button/button.component";
 import { googleSignInStart, emailSignInStart } from "../../store/user/user.actions";
 
 import "./sign-in-form.style.scss";
@@ -18,7 +18,7 @@ const SignInForm = () => {
   const { email, password } = formFields;
 
   const SignInWithGoogle = async () => {
-     dispatch(googleSignInStart())
+    dispatch(googleSignInStart());
   };
 
   const handleSubmit = (event) => {
